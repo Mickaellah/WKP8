@@ -118,7 +118,35 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 
   return newRequire;
 })({"script.js":[function(require,module,exports) {
+var songs = [{
+  title: 'Santimaka',
+  artist: 'Mr Sayd',
+  style: 'Pop',
+  length: '03:55',
+  picture: 'https://i1.sndcdn.com/artworks-000250917292-7gecrq-t500x500.jpg'
+}, {
+  title: 'Tsy avelako ho nofy',
+  artist: 'Skaiz',
+  style: 'Slow',
+  length: '03:40',
+  picture: 'https://tononkira.serasera.org/media/tononkira/o/skaiz.jpg'
+}];
+var form = document.querySelector('.music_form');
+var listOfSongs = document.querySelector('.song_lists');
 
+var songList = function songList() {
+  var html = songs.map(function (song) {
+    return "\n        <li class=\"list_item\">\n            <ul class=\"lists\">\n                <li>".concat(song.picture, "</li>\n                <li>").concat(song.title, " <br>\n                    <small>").concat(song.style, "</small>\n                </li>\n                <li>").concat(song.artist, " <br>\n                    <small>").concat(song.length, "</small>\n                </li>\n                <li>SCORE: 0</li>\n                <li>\n                    <button class=\"add\" type=\"button\">\n                        +1\n                    </button>\n                </li>\n                <li>\n                    <button class=\"deleteBtn\">\n                        <svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n                        <path d=\"M15.5 4L14.5 3H9.5L8.5 4H5V6H19V4H15.5ZM6 19C6 20.1 6.9 21 8 21H16C17.1 21 18 20.1 18 19V7H6V19ZM8 9H16V19H8V9Z\" fill=\"#747474\"/>\n                        </svg>\n                    \n                    </button>\n                </li>\n            </ul>\n        </li>\n    ");
+  }).join('');
+  listOfSongs.innerHTML = html;
+  console.log(html);
+};
+
+songList(); // const items = [];
+// const handleClick = (event) => {
+//     event.preventDefault();
+// }
+// form.addEventListener('submit', handleClick);
 },{}],"../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';

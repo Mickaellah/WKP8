@@ -75,6 +75,36 @@ button {
     text-transform: uppercase;
 }
 
+ul {
+    list-style: none;
+}
+
+.song_lists {
+    background-color: white;
+    border-radius: 10px;
+    padding: 16px;
+    margin-inline-start: 16px;
+}
+
+.list_item {
+    margin-block-start: 32px;
+}
+
+.list_item > ul {
+    display: flex;
+    padding: 0;
+}
+
+.lists > li {
+    margin-inline-start: 16px;
+}
+
+.add {
+    background-color: blue;
+    color: white;
+    border-radius: 5px;
+}
+
 
 
 /*# sourceMappingURL=/style.e308ff8e.css.map */
