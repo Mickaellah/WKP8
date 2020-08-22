@@ -1,45 +1,15 @@
 # WKP8
 
-Hello team! Here's the weekend project 8.
 
-We're going to build a hit parade.
+1. I created an array with four objects inside, generated that object into html. I did the submit form to submit new songs but it didn't work. I handle the delete button. 
 
-![./assets/hit-parade.jpg](./assets/hit-parade.jpg)
 
--   That's a list of songs, sorted from the most popular to the least popular.
--   When we add a new song to the hit parade, the song score is set to zero.
--   The song list is always sorted from the highest score song to the lowest.
--   We can increment the score by clicking the +1 button.
--   We wan delete a song from the list by clicking the bin icon.
--   We can filter the list, by searching for a song title
--   We can filter the list, by selecting a song style in the select.
--   When we click the _reset filters_ button, the filter form is reset, and the list comes back to normal.
--   The data will be saved on the localstorage (except when you filter data)
+2. If I have more time I would tried to finish everything but I couldn't because there is a problem that I couldn't fix.
 
-### Tips :
+3. I tried one thing which we have done before but lately we haven't used it for the delete button.
 
--   Focus on the features first, and if you have some time left, try to replicate this design.
--   Start by choosing the song data structure, and create a few of them in the code.
--   Focus on your basic app functionality first, and then try to save the state of your app to _Local Storage_.
+4. I challenge myself to deal with the submit handler but I couldn't, I found two problems in it but I don't know how to fix it because I am doing what I have done before but it didn't work at all.
 
-Also, please update this readme with the answer to those questions before submitting the project.
+5. I would like to have more explanation with the score and the +1 button.
 
-### Student report :
-
-1. In a few sentences, explain the structure of your project.
-
-2. If you had more time, what area of your project would you improve?
-
-3. Did you learn anything new while working on this project?
-
-4. What was the most challenging part for you?
-
-5. Would you like a new explanation about a specific topic?
-
-6. Any other comments?
-
-Fork this project and then clone your fork to your computer.
-
-I will download everybody's fork on **_Sunday at 5pm_**.
-
-Good luck everyone! 🔥
+6. I am really sorry for not being able to do anything, I stack with the submit handler for submiting the form. I always get an error either the variables that I declared for the object's propertie' wrong or .value is undefine. I spent my time solving it but I couldn't.

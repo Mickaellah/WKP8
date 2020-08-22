@@ -96,7 +96,7 @@ ul {
 }
 
 .lists > li {
-    margin-inline-start: 16px;
+    margin-inline-start: 48px;
 }
 
 .add {
@@ -105,3 +105,8 @@ ul {
     border-radius: 5px;
 }
 
+img {
+    width: 80px;
+    height: 80pxrem;
+    border-radius: 5px;
+}
