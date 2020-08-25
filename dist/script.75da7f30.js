@@ -150,11 +150,14 @@ var songs = [{
 
 var form = document.querySelector('.music_form');
 var listOfSongs = document.querySelector('.song_lists');
-var addBttn = document.querySelector('.addBtn'); // A function which generate the objects into html.
+var addBttn = document.querySelector('.addBtn');
+var search = document.querySelector('#search');
+var musicStyle = document.querySelector('#styles');
+var reseteButton = document.querySelector('.resetBtn'); // A function which generate the objects into html.
 
 var songList = function songList() {
   var html = songs.map(function (song) {
-    return "\n        <li class=\"list_item\">\n            <ul class=\"lists\">\n                <li><img src=\"".concat(song.picture, "\" alt=\"Artist's image\"></li>\n                <li>").concat(song.title, " <br>\n                    <small>").concat(song.style, "</small>\n                </li>\n                <li>").concat(song.artist, " <br>\n                    <small>").concat(song.length, "</small>\n                </li>\n                <li class=\"score\">SCORE: 0</li>\n                <li>\n                    <button class=\"add\" type=\"button\">\n                        +1\n                    </button>\n                </li>\n                <li>\n                    <button class=\"deleteBtn\">\n                        <svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n                        <path d=\"M15.5 4L14.5 3H9.5L8.5 4H5V6H19V4H15.5ZM6 19C6 20.1 6.9 21 8 21H16C17.1 21 18 20.1 18 19V7H6V19ZM8 9H16V19H8V9Z\" fill=\"#747474\"/>\n                        </svg>\n                    </button>\n                </li>\n            </ul>\n        </li>\n    ");
+    return "\n        <li class=\"list_item\">\n            <ul class=\"lists\">\n                <li><img src=\"".concat(song.picture, "\" alt=\"Artist's image\"></li>\n                <li>").concat(song.title, " <br>\n                    <small>").concat(song.style, "</small>\n                </li>\n                <li>").concat(song.artist, " <br>\n                    <small>").concat(song.length, "</small>\n                </li>\n                <li class=\"score\" onclick={increase()}>SCORE: 0</li>\n                <li>\n                    <button class=\"add\" type=\"button\">\n                        +1\n                    </button>\n                </li>\n                <li>\n                    <button class=\"deleteBtn\">\n                        <svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n                        <path d=\"M15.5 4L14.5 3H9.5L8.5 4H5V6H19V4H15.5ZM6 19C6 20.1 6.9 21 8 21H16C17.1 21 18 20.1 18 19V7H6V19ZM8 9H16V19H8V9Z\" fill=\"#747474\"/>\n                        </svg>\n                    </button>\n                </li>\n            </ul>\n        </li>\n    ");
   }).join('');
   listOfSongs.insertAdjacentHTML('beforeend', html);
 };
@@ -164,33 +167,73 @@ songList(); // listOfSongs.dispatchEvent(new CustomEvent('itemUpdated'));
 
 var addSong = function addSong(e) {
   e.preventDefault();
-  var formEl = e.currentTarget;
+  var forms = e.currentTarget;
   var newSong = {
-    title: formEl.title.value,
-    artist: formEl.artist.value,
-    style: formEl.style.value,
-    length: formEl.length.value,
-    picture: formEl.picture.value,
+    title: forms.title.value,
+    artist: forms.artist.value,
+    style: forms.style.value,
+    length: forms.length.value,
+    picture: forms.picture.value,
     id: Date.now()
   };
-  songs.push(newSong);
-  listOfSongs.dispatchEvent(new CustomEvent('itemUpdated'));
-  form.reset();
+  songs.push(newSong); // listOfSongs.dispatchEvent(new CustomEvent('itemUpdated'));
+
+  songList();
+  forms.reset();
 }; // Handle +1 button
 
 
 var handleClick = function handleClick(e) {
-  var btnAdd = e.target.closest('button.add');
+  var increment = e.target.closest('button.add');
 
-  if (btnAdd) {
-    var value = document.querySelector('.score').value;
-    value.textContent = value++;
+  if (increment) {
+    var counter = 0;
+    counter++;
+    document.querySelector('.score').innerHTML += counter;
+    songList();
   }
+}; // A function for finding a song by its title.
+
+
+var findSongByTitle = function findSongByTitle() {
+  var findSong = songs.find(function (song) {
+    return song.title === songs.title;
+  });
+  console.log(findSong);
+  var html = songs.map(function (song) {
+    return "\n        <li class=\"list_item\">\n            <ul class=\"lists\">\n                <li><img src=\"".concat(song.picture, "\" alt=\"Artist's image\"></li>\n                <li>").concat(song.title, " <br>\n                    <small>").concat(song.style, "</small>\n                </li>\n                <li>").concat(song.artist, " <br>\n                    <small>").concat(song.length, "</small>\n                </li>\n                <li class=\"score\" onclick={increase()}>SCORE: 0</li>\n                <li>\n                    <button class=\"add\" type=\"button\">\n                        +1\n                    </button>\n                </li>\n                <li>\n                    <button class=\"deleteBtn\">\n                        <svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n                        <path d=\"M15.5 4L14.5 3H9.5L8.5 4H5V6H19V4H15.5ZM6 19C6 20.1 6.9 21 8 21H16C17.1 21 18 20.1 18 19V7H6V19ZM8 9H16V19H8V9Z\" fill=\"#747474\"/>\n                        </svg>\n                    </button>\n                </li>\n            </ul>\n        </li>\n        ");
+  }).join('');
+  listOfSongs.innerHTML = html;
+}; // To filter the songs by which style you choose from the dropdown.
+
+
+var filteredByStyle = function filteredByStyle(id) {
+  var filteredSong = [].concat(songs);
+  filteredSong = filteredSong.filter(function (song) {
+    return song.id === id;
+  });
+  var html = filteredSong.map(function (song) {
+    return "\n        <li class=\"list_item\">\n            <ul class=\"lists\">\n                <li><img src=\"".concat(song.picture, "\" alt=\"Artist's image\"></li>\n                <li>").concat(song.title, " <br>\n                    <small>").concat(song.style, "</small>\n                </li>\n                <li>").concat(song.artist, " <br>\n                    <small>").concat(song.length, "</small>\n                </li>\n                <li class=\"score\" onclick={increase()}>SCORE: 0</li>\n                <li>\n                    <button class=\"add\" type=\"button\">\n                        +1\n                    </button>\n                </li>\n                <li>\n                    <button class=\"deleteBtn\">\n                        <svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n                        <path d=\"M15.5 4L14.5 3H9.5L8.5 4H5V6H19V4H15.5ZM6 19C6 20.1 6.9 21 8 21H16C17.1 21 18 20.1 18 19V7H6V19ZM8 9H16V19H8V9Z\" fill=\"#747474\"/>\n                        </svg>\n                    </button>\n                </li>\n            </ul>\n        </li>\n        ");
+  }).join('');
+  listOfSongs.innerHTML = html;
+}; // Sort the element ny its score.
+
+
+var sortElement = function sortElement() {
+  var sortedElement = songs.map().document.querySelector('.score').sort(function (a, b) {
+    return b - a;
+  });
 }; // Event listeners.
 
 
 form.addEventListener('submit', addSong);
-listOfSongs.addEventListener('click', handleClick); // Event delegation for delete button.
+listOfSongs.addEventListener('click', handleClick);
+search.addEventListener('keydown', findSongByTitle);
+musicStyle.addEventListener('change', filteredByStyle); // An event listener for the reset button.
+
+reseteButton.addEventListener('click', function (e) {
+  songList();
+}); // Event delegation for delete button.
 
 window.addEventListener('click', function (e) {
   if (e.target.closest('button.deleteBtn')) {
@@ -227,7 +270,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64510" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49855" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
